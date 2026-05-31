@@ -1,0 +1,7 @@
+Video: https://youtu.be/hvbtxg70t1c?si=-Laboonb7waSSV_-
+
+Referencias:
+
+http://fcaenlinea1.unam.mx/anexos/organizadores_graficos.pdf
+
+https://johnwickerson.wordpress.com/2020/05/21/diagrams-for-composing-compilers/ 
