@@ -1,7 +1,7 @@
  📌 Benchmarking en JavaScript (Node.js) - Ecuación de Segundo Grado
  👤 Desarrollado por: Rhixeidys Aguilera 
 
-Este directorio contiene la implementación en JavaScript del **Algoritmo 2**, requerido para la Actividad II de la asignatura Lenguajes y Compiladores. El algoritmo simula una carga de procesamiento intensivo calculando las raíces de una ecuación de segundo grado para vectores a, b y c con una cantidad de elementos n=200.
+Este directorio contiene la implementación en JavaScript del Algoritmo 2, requerido para la Actividad II de la asignatura Lenguajes y Compiladores. El algoritmo simula una carga de procesamiento intensivo calculando las raíces de una ecuación de segundo grado para vectores a, b y c con una cantidad de elementos n=200.
 
 Esta implementación fue desarrollada para medir empíricamente el tiempo de ejecución y el consumo de memoria pico del lenguaje JavaScript bajo el motor Just-In-Time (JIT) V8[cite: 86].
 
@@ -9,25 +9,25 @@ Esta implementación fue desarrollada para medir empíricamente el tiempo de eje
 
 Para reproducir este escenario de pruebas empíricas, asegúrese de contar con el siguiente software instalado en su sistema:
 
-- **Entorno de ejecución:** [Node.js](https://nodejs.org/) (Se recomienda versión v18.0.0 o superior. Las pruebas originales se corrieron en la v22.17.1).
-- **Sistema Operativo:** Windows 10 Pro
-- **Especificaciones del Hardware de Prueba:** * **CPU:** AMD Ryzen 3 PRO 2300U w/ Radeon Vega Mobile Gfx   2.00 GHz
-- **RAM:** 8,00 GB
+- Entorno de ejecución: [Node.js](https://nodejs.org/) (Se recomienda versión v18.0.0 o superior. Las pruebas originales se corrieron en la v22.17.1).
+- Sistema Operativo: Windows 10 Pro
+- Especificaciones del Hardware de Prueba: CPU: AMD Ryzen 3 PRO 2300U w/ Radeon Vega Mobile Gfx   2.00 GHz
+- RAM: 8,00 GB
 
  🚀 Instrucciones de Ejecución
 
-JavaScript, a través de Node.js, es interpretado y compilado en tiempo de ejecución (JIT), por lo que **no es necesario un paso previo de compilación manual** para generar un ejecutable. 
+JavaScript, a través de Node.js, es interpretado y compilado en tiempo de ejecución (JIT), por lo que no es necesario un paso previo de compilación manual para generar un ejecutable. 
 
-Siga estos pasos para reproducir el *benchmarking*:
+Siga estos pasos para reproducir el benchmarking:
 
-1. **Clonar o descargar el repositorio:**
+1. Clonar o descargar el repositorio:
    Asegúrese de tener el archivo fuente `calculo_cuadratico.js` en su máquina local.
 
-2. **Abrir la terminal:**
+2. Abrir la terminal:
    Abra la consola de comandos (Terminal, PowerShell o Bash) y navegue hasta el directorio donde se encuentra el archivo fuente.
    ```bash
    cd ruta/hacia/la/carpeta/del/script
-3. **Ejecutar el script:**
+3. Ejecutar el script:
    Utilice el CLI de Node.js para interpretar y ejecutar el algoritmo ejecutando el siguiente comando: 
    node calculo_cuadratico.js
 
@@ -35,6 +35,6 @@ Siga estos pasos para reproducir el *benchmarking*:
 
 Al finalizar la ejecución (que tomará apenas unos milisegundos), la consola imprimirá un reporte detallado con las siguientes métricas de rendimiento:
 
-- **Tiempo de Ejecución:** Calculado utilizando el módulo interno perf_hooks (performance.now()) para garantizar una precisión de sub-milisegundos, aislando el tiempo real de la CPU dedicado al algoritmo.
-- **Consumo de Memoria Pico:** Medido a través de process.memoryUsage().heapUsed, reflejando la cantidad exacta de memoria en Megabytes (MB) asignada por el Recolector de Basura (Garbage Collector) del motor V8 durante la creación e iteración de los vectores.
-- **Muestra de Cálculo:** Se imprimirá el resultado de la iteración 0 para comprobar el correcto funcionamiento lógico de la fórmula cuadrática.
+- Tiempo de Ejecución: Calculado utilizando el módulo interno perf_hooks (performance.now()) para garantizar una precisión de sub-milisegundos, aislando el tiempo real de la CPU dedicado al algoritmo.
+- Consumo de Memoria Pico: Medido a través de process.memoryUsage().heapUsed, reflejando la cantidad exacta de memoria en Megabytes (MB) asignada por el Recolector de Basura (Garbage Collector) del motor V8 durante la creación e iteración de los vectores.
+- Muestra de Cálculo: Se imprimirá el resultado de la iteración 0 para comprobar el correcto funcionamiento lógico de la fórmula cuadrática.
