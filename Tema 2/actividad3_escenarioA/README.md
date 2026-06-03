@@ -1,7 +1,7 @@
 # Escenario Operativo A — Prevención de Fuga Térmica y Gestión de Alivio de Carga
 
 **Actividad III · Lenguaje L · ECO-GRID**
-Pareja: **Ronniel e Yvanna**
+Pareja: ****
 
 ---
 
