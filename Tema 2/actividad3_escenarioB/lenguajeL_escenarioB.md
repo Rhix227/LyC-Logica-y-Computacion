@@ -1,6 +1,6 @@
 # Lenguaje L — ECO-GRID | Escenario Operativo B
 
-> **Ronniel e Yvanna** — Balance de Carga y Optimización Energética Autónoma
+> **** — Balance de Carga y Optimización Energética Autónoma
 
 ---
 
@@ -42,6 +42,7 @@
 | Estados de actuador | `CONECTADO`, `AISLADO`, `ENCENDIDO`, `APAGADO` |
 | Operadores relacionales | `>` `<` `>=` `<=` `==` `!=` |
 | Operadores lógicos | `Y` (AND), `O` (OR), `NO` (NOT) |
+| Operadores aritméticos | `+` `-` `*` `/` |
 | Comentarios | `# texto` — ignorado por el analizador léxico |
 
 ---
@@ -124,7 +125,7 @@ init_grid
                 emitir_alerta("Excedente energetico: inyectando kW a la red publica");
             sino
                 emitir_alerta("Temperatura elevada en bateria: inyeccion suspendida por seguridad");
-            fin_si;
+            fin_si
 
         sino
 

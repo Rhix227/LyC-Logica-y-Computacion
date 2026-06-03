@@ -1,0 +1,64 @@
+# ============================================================
+#  PROGRAMA A  -  ECO-GRID  -  Prevencion de Fuga Termica y Gestion de Alivio de Carga
+#  Lenguaje L  |  Ronniel e Yvanna
+#  Escenario Operativo A: Monitoreo termico critico y proteccion del banco de baterias
+# ============================================================
+
+init_grid
+
+    # --- Umbrales y parametros de seguridad termica ---
+    UMBRAL_CRITICO_TEMP = 55          # grados Celsius: temperatura de peligro termico
+    UMBRAL_TEMP_NORMAL  = 40          # grados Celsius: temperatura de retorno a operacion normal
+    MAX_CICLOS_PELIGRO  = 5           # ciclos maximos tolerados antes de emitir emergencia total
+    banco               = banco_1     # banco de baterias principal bajo monitoreo
+    ciclos_en_peligro   = 0           # contador de ciclos consecutivos con temperatura critica
+
+    activo = VERDADERO
+
+    # --- Lazo de monitoreo termico continuo ---
+    mientras activo == VERDADERO ejecutar
+
+        temp = leer_temperatura(banco);       # lectura del sensor termico de celda del banco
+
+        # CASO CRITICO: temperatura supera el umbral de seguridad -> riesgo de fuga termica
+        si_verdadero temp > UMBRAL_CRITICO_TEMP entonces
+
+            ciclos_en_peligro = ciclos_en_peligro + 1;
+
+            # Acciones inmediatas de proteccion (orden determinista)
+            activar_refrigeracion(banco);                            # 1. encender sistema de refrigeracion auxiliar
+            conmutar_linea(linea_solar_carga, AISLADO);              # 2. desconectar ingreso de carga solar
+            conmutar_linea(sector_industrial, AISLADO);              # 3. aislar sector industrial de la microred
+            conmutar_linea(sector_industrial_respaldo, CONECTADO);   # 4. desviar consumo a red comercial de respaldo
+
+            emitir_alerta("ALERTA TERMICA: temperatura critica detectada en banco de baterias");
+
+            # Verificar si el peligro persiste tras el periodo maximo tolerado
+            si_verdadero ciclos_en_peligro >= MAX_CICLOS_PELIGRO entonces
+                emitir_alerta("EMERGENCIA CRITICA: fuga termica persistente - intervencion manual requerida");
+                activo = FALSO;      # detener el ciclo automatico para forzar intervencion humana
+            fin_si
+
+        sino
+
+            # Temperatura dentro del rango operativo seguro
+            si_verdadero ciclos_en_peligro > 0 entonces
+
+                # La temperatura bajo: restituir estado normal de la planta
+                conmutar_linea(linea_solar_carga, CONECTADO);            # reconectar carga solar
+                conmutar_linea(sector_industrial, CONECTADO);            # restituir sector industrial a microred
+                conmutar_linea(sector_industrial_respaldo, AISLADO);     # desconectar respaldo comercial
+                ciclos_en_peligro = 0;
+                emitir_alerta("Temperatura normalizada: planta restituida a operacion normal");
+
+            sino
+                emitir_alerta("Monitoreo activo: temperatura en rango seguro");
+            fin_si
+
+        fin_si
+
+        esperar(60);                # re-evaluar el estado termico cada 60 segundos
+
+    fin_mientras
+
+terminar

@@ -34,7 +34,7 @@ init_grid
                 emitir_alerta("Excedente energetico: inyectando kW a la red publica");
             sino
                 emitir_alerta("Temperatura elevada en bateria: inyeccion suspendida por seguridad");
-            fin_si;
+            fin_si
 
         sino
 
