@@ -1,0 +1,63 @@
+# ============================================================
+#  PROGRAMA B  -  ECO-GRID  -  Balance de Carga y Optimizacion Energetica Autonoma
+#  Lenguaje L  |  Ronniel e Yvanna
+#  Escenario Operativo B: Gestion autonoma de excedentes y proteccion nocturna
+# ============================================================
+
+init_grid
+
+    # --- Umbrales de decision ---
+    UMBRAL_OPTIMO     = 90          # % carga para considerar excedente vendible
+    UMBRAL_CRITICO    = 20          # % carga minimo de seguridad nocturna
+    UMBRAL_TEMP_SEGURA = 45         # grados Celsius: maximo seguro para inyeccion a red
+    banco             = banco_1     # banco de baterias principal
+
+    activo = VERDADERO
+
+    # --- Lazo de optimizacion energetica autonoma (evaluacion continua) ---
+    mientras activo == VERDADERO ejecutar
+
+        carga      = estado_carga(banco);        # % de carga actual de las baterias
+        generacion = flujo_generacion();         # kW generados por los paneles solares
+        demanda    = demanda_actual();           # kW demandados por la planta
+        hora       = hora_actual();              # hora del sistema (0..23)
+
+        # CASO 1: carga optima Y generacion supera la demanda -> vender excedente a la red
+        si_verdadero carga > UMBRAL_OPTIMO Y generacion > demanda entonces
+
+            temp = leer_temperatura(banco);          # verificar temperatura antes de inyectar
+
+            si_verdadero temp < UMBRAL_TEMP_SEGURA entonces
+                excedente = generacion - demanda;
+                conmutar_linea(rele_venta, CONECTADO);
+                inyectar_red(excedente);
+                emitir_alerta("Excedente energetico: inyectando kW a la red publica");
+            sino
+                emitir_alerta("Temperatura elevada en bateria: inyeccion suspendida por seguridad");
+            fin_si;
+
+        sino
+
+            # CASO 2: carga critica EN horario nocturno de alta demanda
+            si_verdadero carga < UMBRAL_CRITICO Y (hora >= 18 O hora <= 6) entonces
+
+                # Preservar suministro critico: aislar sectores no esenciales
+                conmutar_linea(sector_no_esencial, AISLADO);
+                conmutar_linea(sector_medico, CONECTADO);
+                conmutar_linea(sector_servidores, CONECTADO);
+                emitir_alerta("Carga critica nocturna: aislando sectores no esenciales");
+
+            sino
+
+                # Estado intermedio: operacion estable, sin accion de balance
+                emitir_alerta("Operacion estable: sin accion de balance requerida");
+
+            fin_si
+
+        fin_si
+
+        esperar(60);                 # re-evaluar cada 60 segundos
+
+    fin_mientras
+
+terminar
