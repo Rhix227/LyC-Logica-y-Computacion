@@ -1,11 +1,11 @@
-**Actividad II: Ejercicio 2 en JavaScript**
+Actividad II: Ejercicio 2 en JavaScript
 
 Paso 1: Guardar el archive
- Descarga y guarda el archivo llamándolo calculo_cuadratico.js
+- Descarga y guarda el archivo llamándolo calculo_cuadratico.js
 
 Paso 2: Abrir la terminal
- Abre la terminal integrada de tu editor y navega hasta la carpeta donde guardaste el archivo.
+- Abre la terminal integrada de tu editor y navega hasta la carpeta donde guardaste el archivo.
 
 Paso 3: Ejecutar el motor V8
- Escribe el siguiente comando para ejecutar el script utilizando Node.js: node calculo_cuadratico.js
- Al presionar Enter, verás en la consola el tiempo exacto en milisegundos (ms) y la memoria consumida en megabytes (MB).
+- Escribe el siguiente comando para ejecutar el script utilizando Node.js: node calculo_cuadratico.js
+- Al presionar Enter, verás en la consola el tiempo exacto en milisegundos (ms) y la memoria consumida en megabytes (MB).
