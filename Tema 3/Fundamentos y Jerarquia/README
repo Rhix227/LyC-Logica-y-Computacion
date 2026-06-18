@@ -1,0 +1,47 @@
+2.1.- Fundamentos y Jerarquía de Chomsky
+👤 Desarrollado por: Rhixeidys Aguilera
+
+📌 Descripción del Módulo
+Este directorio contiene la implementación algorítmica de los conceptos teóricos correspondientes a la sección de Fundamentos y Jerarquía de Chomsky. Los algoritmos fueron diseñados en TypeScript y estructurados para ejecutarse sobre Node.js, demostrando de forma práctica los mecanismos matemáticos que subyacen en la construcción de compiladores e intérpretes.
+
+🛠️ Tecnologías y Prerrequisitos
+Para ejecutar estos códigos localmente, el entorno debe contar con:
+* [Node.js](https://nodejs.org/)
+* TypeScript
+* Entorno de ejecución `ts-node`
+
+🚀 Configuración del Entorno
+1. Clonar el repositorio en su máquina local.
+2. Navegar mediante la terminal hasta este directorio.
+3. Instalar las dependencias de desarrollo ejecutando:
+   ```bash
+   npm install
+
+📂 Estructura de Archivos y Ejecución
+Cada archivo fue programado de manera independiente para ilustrar un concepto específico de la teoría de autómatas y gramáticas formales. A continuación, se detalla el comando para ejecutar cada demostración:
+
+1. Relación Gramática-Lenguaje (Derivación)Demuestra el algoritmo mediante el cual una gramática aplica reglas de producción finitas para generar iterativamente una palabra válida de un lenguaje formal.  
+*Archivo: generador.ts
+*Comando de ejecución: ```bashnpx 
+ts-node generador.ts
+
+2. Jerarquía de Chomsky (Modelado de los 4 Tipos)
+Representación algorítmica de los 4 niveles de complejidad gramatical:  
+PDF
+
+Tipo 0 (Irrestrictas): Modelado de un generador cuyas reglas de producción carecen de restricciones estructurales (equivalente a una Máquina de Turing).
+
+npx ts-node tipo0_irrestricta.ts
+
+Tipo 1 (Sensibles al Contexto): Algoritmo que condiciona la transformación de variables a la validación de su entorno o contexto inmediato.
+
+npx ts-node tipo1_contexto.ts
+
+Tipo 2 (Libres de Contexto): Implementación de la lógica de un Autómata de Pila. Demuestra el análisis sintáctico al validar estructuras jerárquicas anidadas (ej. paréntesis balanceados).
+
+npx ts-node tipo2_pila.ts
+
+Tipo 3 (Regulares): Implementación de un analizador léxico lineal optimizado mediante expresiones regulares para la clasificación eficiente de tokens.
+
+npx ts-node tipo3_lexico.ts
+
