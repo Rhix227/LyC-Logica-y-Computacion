@@ -1,0 +1,47 @@
+// AFD para el subconjunto simplificado de PGN/SAN (Ajedrez) - Punto 2.4
+// Render:  dot -Tpng afd_diagrama.dot -o afd_diagrama.png
+// Online:  https://dreampuf.github.io/GraphvizOnline
+//
+// Estados de aceptacion (doublecircle): qA, qC1, qC2, qS
+// El estado muerto qdead se omite por claridad (convencion estandar).
+
+digraph AFD_Ajedrez {
+    rankdir = LR;
+    fontname = "Helvetica";
+    node [fontname = "Helvetica"];
+    edge [fontname = "Helvetica"];
+
+    // marca de estado inicial
+    inicio [shape = point];
+
+    // estados normales
+    node [shape = circle];
+    q0; qP; qpf; qf; qr; qO1; qO2; qO3;
+
+    // estados de aceptacion
+    node [shape = doublecircle];
+    qA; qC1; qC2; qS;
+
+    // transiciones
+    inicio -> q0;
+
+    // ---- rama de jugadas (peon / pieza / captura) ----
+    q0  -> qP  [label = "K,Q,R,B,N"];
+    q0  -> qpf [label = "a-h"];
+    qP  -> qr  [label = "a-h"];
+    qP  -> qf  [label = "x"];
+    qpf -> qA  [label = "1-8"];
+    qpf -> qf  [label = "x"];
+    qf  -> qr  [label = "a-h"];
+    qr  -> qA  [label = "1-8"];
+    qA  -> qS  [label = "+,#"];
+
+    // ---- rama de enroque ----
+    q0  -> qO1 [label = "O"];
+    qO1 -> qO2 [label = "-"];
+    qO2 -> qC1 [label = "O"];
+    qC1 -> qO3 [label = "-"];
+    qC1 -> qS  [label = "+,#"];
+    qO3 -> qC2 [label = "O"];
+    qC2 -> qS  [label = "+,#"];
+}
