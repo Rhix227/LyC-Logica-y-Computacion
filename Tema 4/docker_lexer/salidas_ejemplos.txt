@@ -1,0 +1,104 @@
+############################################
+# SALIDA - ejemplo1_Dockerfile
+############################################
+
+=== Analizando: ejemplo1_Dockerfile ===
+
+('INSTRUCCION', 'FROM', 2, 0)
+('IMAGEN_TAG', 'python:3.12-slim', 2, 5)
+('INSTRUCCION', 'LABEL', 3, 0)
+('ENV_VAR', 'maintainer="ronniel@example.com"', 3, 6)
+('INSTRUCCION', 'WORKDIR', 4, 0)
+('IMAGEN_TAG', '/app', 4, 8)
+('INSTRUCCION', 'ENV', 5, 0)
+('ENV_VAR', 'PYTHONUNBUFFERED=1', 5, 4)
+('INSTRUCCION', 'COPY', 6, 0)
+('IMAGEN_TAG', 'requirements.txt', 6, 5)
+('IMAGEN_TAG', '.', 6, 22)
+('INSTRUCCION', 'RUN', 7, 0)
+('IMAGEN_TAG', 'pip', 7, 4)
+('IMAGEN_TAG', 'install', 7, 8)
+('IMAGEN_TAG', '-r', 7, 16)
+('IMAGEN_TAG', 'requirements.txt', 7, 19)
+('INSTRUCCION', 'COPY', 8, 0)
+('IMAGEN_TAG', '.', 8, 5)
+('IMAGEN_TAG', '.', 8, 7)
+('INSTRUCCION', 'EXPOSE', 9, 0)
+('NUMERO', '8080/tcp', 9, 7)
+('INSTRUCCION', 'CMD', 10, 0)
+('JSON_ARRAY', '["python", "app.py"]', 10, 4)
+
+Total de tokens reconocidos: 23
+=== Fin del análisis ===
+
+
+############################################
+# SALIDA - ejemplo2_Dockerfile
+############################################
+
+=== Analizando: ejemplo2_Dockerfile ===
+
+('INSTRUCCION', 'FROM', 2, 0)
+('IMAGEN_TAG', 'golang:1.22', 2, 5)
+('IMAGEN_TAG', 'AS', 2, 17)
+('IMAGEN_TAG', 'builder', 2, 20)
+('INSTRUCCION', 'ARG', 3, 0)
+('ENV_VAR', 'APP_VERSION=1.0.0', 3, 4)
+('INSTRUCCION', 'WORKDIR', 4, 0)
+('IMAGEN_TAG', '/src', 4, 8)
+('INSTRUCCION', 'COPY', 5, 0)
+('FLAG', '--from=builder', 5, 5)
+('IMAGEN_TAG', '/src/go.mod', 5, 20)
+('IMAGEN_TAG', '.', 5, 32)
+('INSTRUCCION', 'RUN', 6, 0)
+('IMAGEN_TAG', 'go', 6, 4)
+('IMAGEN_TAG', 'build', 6, 7)
+('IMAGEN_TAG', '-o', 6, 13)
+('IMAGEN_TAG', '/out/app', 6, 16)
+('IMAGEN_TAG', '.', 6, 25)
+('INSTRUCCION', 'FROM', 8, 0)
+('IMAGEN_TAG', 'alpine@sha256:c5b1261d6d3e43071626931fc004f70149baeba2c8ec672bd4f27761f8e1ad6', 8, 5)
+('INSTRUCCION', 'COPY', 9, 0)
+('FLAG', '--from=builder', 9, 5)
+('IMAGEN_TAG', '/out/app', 9, 20)
+('IMAGEN_TAG', '/usr/local/bin/app', 9, 29)
+('INSTRUCCION', 'VOLUME', 10, 0)
+('IMAGEN_TAG', '/data', 10, 7)
+('INSTRUCCION', 'USER', 11, 0)
+('NUMERO', '1000', 11, 5)
+('INSTRUCCION', 'ENTRYPOINT', 12, 0)
+('JSON_ARRAY', '["/usr/local/bin/app"]', 12, 11)
+
+Total de tokens reconocidos: 30
+=== Fin del análisis ===
+
+
+############################################
+# SALIDA - ejemplo3_Dockerfile
+############################################
+
+=== Analizando: ejemplo3_Dockerfile ===
+
+('INSTRUCCION', 'FROM', 2, 0)
+('IMAGEN_TAG', 'nginx:1.27', 2, 5)
+('INSTRUCCION', 'LABEL', 3, 0)
+('ENV_VAR', 'version="2.0"', 3, 6)
+('INSTRUCCION', 'ENV', 4, 0)
+('ENV_VAR', 'APP_ENV=production', 4, 4)
+('INSTRUCCION', 'COPY', 5, 0)
+('IMAGEN_TAG', './site', 5, 5)
+('IMAGEN_TAG', '/usr/share/nginx/html', 5, 12)
+('INSTRUCCION', 'EXPOSE', 6, 0)
+('NUMERO', '80/tcp', 6, 7)
+('INSTRUCCION', 'RUN', 8, 0)
+('IMAGEN_TAG', 'echo', 8, 4)
+('STRING', '"deploy % ok"', 8, 9)
+('IMAGEN_TAG', 'true', 8, 26)
+('INSTRUCCION', 'CMD', 9, 0)
+('JSON_ARRAY', '["nginx", "-g", "daemon off;"]', 9, 4)
+  [ERROR LÉXICO] Carácter/lexema no reconocido: '@' en línea 8, columna 23
+  [ERROR LÉXICO] Carácter/lexema no reconocido: '@' en línea 8, columna 24
+
+Total de tokens reconocidos: 17
+=== Fin del análisis ===
+

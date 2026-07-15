@@ -1,0 +1,9 @@
+# Ejemplo 3: contiene errores lexicos intencionales para la demostracion
+FROM nginx:1.27
+LABEL version="2.0"
+ENV APP_ENV=production
+COPY ./site /usr/share/nginx/html
+EXPOSE 80/tcp
+# El simbolo '%' y '@' sueltos no pertenecen a ningun patron valido
+RUN echo "deploy % ok" @@ true
+CMD ["nginx", "-g", "daemon off;"]

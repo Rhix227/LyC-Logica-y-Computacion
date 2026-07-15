@@ -1,0 +1,10 @@
+# Ejemplo 1: Imagen simple para una aplicacion Python
+FROM python:3.12-slim
+LABEL maintainer="ronniel@example.com"
+WORKDIR /app
+ENV PYTHONUNBUFFERED=1
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 8080/tcp
+CMD ["python", "app.py"]

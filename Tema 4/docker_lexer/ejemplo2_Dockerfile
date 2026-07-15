@@ -1,0 +1,12 @@
+# Ejemplo 2: Build multi-stage con flags y digest de imagen
+FROM golang:1.22 AS builder
+ARG APP_VERSION=1.0.0
+WORKDIR /src
+COPY --from=builder /src/go.mod .
+RUN go build -o /out/app .
+
+FROM alpine@sha256:c5b1261d6d3e43071626931fc004f70149baeba2c8ec672bd4f27761f8e1ad6
+COPY --from=builder /out/app /usr/local/bin/app
+VOLUME /data
+USER 1000
+ENTRYPOINT ["/usr/local/bin/app"]
