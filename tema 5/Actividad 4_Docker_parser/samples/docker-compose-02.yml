@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  svc1:
+    image: demo/svc1:1.0
+    networks:
+      - net1
+  svc2:
+    image: demo/svc2:1.0
+    networks:
+      - net2
+      - net1
+  svc3:
+    image: demo/svc3:1.0
+    networks:
+      - net1
+  svc4:
+    image: demo/svc4:1.0
+    networks:
+      - net2
+      - net1
+networks:
+  net1:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-net1
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
+  net2:
+    driver: overlay
+    external: true
+    attachable: true

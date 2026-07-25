@@ -1,0 +1,132 @@
+version: "3.8"
+services:
+  svc1:
+    image: demo/svc1:1.0
+    networks:
+      - net1
+  svc2:
+    image: demo/svc2:1.0
+    networks:
+      - net2
+      - net3
+  svc3:
+    image: demo/svc3:1.0
+    networks:
+      - net3
+      - net4
+      - net5
+  svc4:
+    image: demo/svc4:1.0
+    networks:
+      - net4
+  svc5:
+    image: demo/svc5:1.0
+    networks:
+      - net5
+      - net6
+  svc6:
+    image: demo/svc6:1.0
+    networks:
+      - net6
+      - net7
+      - net8
+  svc7:
+    image: demo/svc7:1.0
+    networks:
+      - net7
+  svc8:
+    image: demo/svc8:1.0
+    networks:
+      - net8
+      - net1
+  svc9:
+    image: demo/svc9:1.0
+    networks:
+      - net1
+      - net2
+      - net3
+  svc10:
+    image: demo/svc10:1.0
+    networks:
+      - net2
+  svc11:
+    image: demo/svc11:1.0
+    networks:
+      - net3
+      - net4
+  svc12:
+    image: demo/svc12:1.0
+    networks:
+      - net4
+      - net5
+      - net6
+  svc13:
+    image: demo/svc13:1.0
+    networks:
+      - net5
+  svc14:
+    image: demo/svc14:1.0
+    networks:
+      - net6
+      - net7
+  svc15:
+    image: demo/svc15:1.0
+    networks:
+      - net7
+      - net8
+      - net1
+  svc16:
+    image: demo/svc16:1.0
+    networks:
+      - net8
+networks:
+  net1:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-net1
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
+  net2:
+    driver: overlay
+    external: true
+    attachable: true
+  net3:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.0.0/16
+          gateway: 172.22.0.1
+  net4:
+    driver: overlay
+    driver_opts:
+      com.docker.network.bridge.name: br-net4
+    external: true
+    attachable: true
+  net5:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.24.0.0/16
+          gateway: 172.24.0.1
+  net6:
+    driver: overlay
+    external: true
+    attachable: true
+  net7:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-net7
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.26.0.0/16
+          gateway: 172.26.0.1
+  net8:
+    driver: overlay
+    external: true
+    attachable: true
